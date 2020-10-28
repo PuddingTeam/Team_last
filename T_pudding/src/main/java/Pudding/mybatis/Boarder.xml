@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Boarder.model.Boarder">  
+             
+  <insert id="InsertBoard">
+  		insert into board(boardno, board_writer, board_passwd, board_title, board_date, board_recount, board_content)
+		 values (board_seq.nextval,	#{board_writer, jdbcType=VARCHAR},#{board_passwd, jdbcType=VARCHAR},#{board_title, jdbcType=VARCHAR},sysdate,0,#{board_content})
+		 </insert>
+         
+  
+<select id="SelectBoard" resultType="MyBoarder">
+		select rownum,boardno, board_writer, board_passwd, board_title, board_date, board_recount, board_content,board_recontent from 
+		(select boardno, board_writer, board_passwd, board_title, board_date, board_recount, board_content,
+		(select count(*) from recontent where recontent_boardno=b.boardno) as board_recontent from board b
+		<if test="whatColumn=='board_title'">where board_title like #{keyword} </if>
+
+		<if test="whatColumn=='board_writer'">where board_writer like #{keyword} </if>
+		order by boardno desc)	order by rownum asc 
+</select>
+
+
+	<select id="SelectoneNum" resultType="MyBoarder">
+	select * from board 
+	where boardno =#{boardno} </select>
+
+	<delete id="DeleteBoard">delete from board where boardno=#{boardno } </delete>
+
+	<update id="UpdateBoard">update board set
+		board_title=#{board_title},board_content=#{board_content},
+		board_passwd =#{board_passwd } where boardno=#{boardno } </update>
+
+
+	<select id="GetTotalCount" resultType="int">
+		select count(*) from board
+		<if test="whatColumn=='board_title'">where board_title like #{keyword} </if>
+
+		<if test="whatColumn=='board_writer'">where board_writer like #{keyword} </if>
+
+	</select>
+  	
+  	<update id="addCount">
+  		update board set board_recount=board_recount+1 where boardno=#{boardno}
+  	</update>
+  	
+  	<select id="GetpasswdData" resultType="MyBoarder">
+  	select * from board where BOARD_PASSWD = #{board_passwd} and boardno = #{boardno}
+  	
+  	</select>
+  
+</mapper>

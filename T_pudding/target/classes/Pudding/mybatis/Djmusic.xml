@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Music.model.Djmusic">
+<update id="updateDj">
+update music set music_dj=concat(#{djtitle},music_dj) where music_title=#{djmusicl}
+</update>
+
+<update id="deleteDj">
+update music set music_dj=#{djtitle} where music_title=#{djmusicl}
+</update>
+
+<update id="deleteoneDj">
+update music set music_dj=null where music_title=#{djmusicl}
+</update>
+
+</mapper>

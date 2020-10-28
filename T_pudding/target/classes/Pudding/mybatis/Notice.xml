@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Admin.model.Notice">
+<insert id="insertdata">
+insert into notice values(notice_seq.nextval,#{notice_title},#{notice_content},0,sysdate)
+</insert>
+<select id="GetDataList" resultType="MyNotice">
+		select rownum, noticeno, notice_title, notice_content, notice_recount, notice_date from
+		(select * from notice
+		order by noticeno desc) 
+		order by rownum asc
+	</select>
+
+
+
+	<update id="update">
+	update notice set notice_title= #{notice_title}, notice_content= #{notice_content} where noticeno=#{noticeno}
+	
+	</update>
+	<select id="getOneData" resultType="MyNotice">
+		select * from notice where noticeno=#{noticeno}
+	</select>
+	<delete id="deletedata">
+	delete notice where noticeno=#{noticeno}
+	</delete>
+	<update id="addCount">
+	update notice set notice_recount=notice_recount+1 where noticeno=#{noticeno}
+	</update>
+	<select id="GetTotalCount" resultType="int">
+		select count(*) from notice
+	
+
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

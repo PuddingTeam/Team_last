@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Music.model.Music">
+<insert id="insertdata">
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price)
+ values(music_seq.nextval,#{music_title},#{music_singer},#{music_ganre},#{music_image},#{music_song},#{music_lyics},#{music_date},0,500)
+</insert>
+<update id="updatedata">
+update music set music_title=#{music_title}, music_singer=#{music_singer}, music_ganre=#{music_ganre},
+music_image=#{music_image}, music_song=#{music_song}, music_lyics=#{music_lyics}, music_date=#{music_date} where mno=#{mno}
+
+</update>
+<update id="updateDj">
+update music set music_dj=#{djadd.djmusic} where music_title=#{djadd.djtitle}
+</update>
+	<select id="GetDataList" resultType="MyMusic">
+		select * from music order by mno
+	</select>
+	<select id="getSingerDataList" resultType="MyMusic">
+		select * from music where music_singer=#{music_singer}
+	</select>
+	
+	
+	<select id="getDataSearchtList" resultType="MyMusic">
+		select * from music where music_singer like #{search} or music_title like #{search}
+	</select>
+	<select id="GetOneData" resultType="MyMusic">
+		select * from music where mno =#{mno}
+	</select>
+	<select id="hehehehe" resultType="MyMusic">
+	select * from music where music_title=#{music_title}
+	</select>
+	<select id="getmusicdj" resultType="MyMusic">
+		select * from music where music_title=#{music_title}
+	</select>
+	
+		<delete id="delete">
+		delete from music where mno=#{mno}
+	</delete>
+		<select id="selectOne" resultType="MyMusic">
+		select * from music where mno=#{mno}
+	</select>
+		<select id="selectDj" resultType="MyMusic">
+		select * from music where music_dj=#{dj}
+		
+	</select>
+	
+	<update id="recountPlus">
+		update music set music_recount = music_recount+1 where mno=#{mno}
+	</update>
+	
+	<update id="heartPlus">
+		update music set music_heart = #{music_heart}+1 where mno=#{mno}
+	
+	</update>
+	
+	
+	<select id="heartList" resultType="MyMusic">
+	select * from music order by music_heart desc
+	</select>
+	
+	<select id = "recountlist" resultType="MyMusic">
+	select * from music order by music_recount desc
+	</select>
+	
+	<select id="getDataHeartList" resultType="MyMusic">
+	select * from music order by music_heart desc 
+	</select>
+
+	<select id="getDataRecountList" resultType="MyMusic">
+	select * from music order by music_recount desc 
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

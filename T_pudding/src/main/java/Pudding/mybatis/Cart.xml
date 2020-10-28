@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Music.model.Cart">
+
+<insert id="cartinsert">
+	insert into cart 
+	values(cart_seq.nextval,#{user},#{music_image},#{mno},#{music_title},#{music_singer},#{music_price},sysdate,default) 
+	</insert>
+<select id="cartSelect" resultType="MyCart">
+select * from cart where cart_user=#{userid}
+</select>
+
+<delete id="deleteCart">
+delete from cart where cart_num=#{cart_num} 
+</delete>
+
+<delete id="deleteUsercart"> 
+delete from cart where cart_user=#{orderuser}
+ </delete>
+
+<select id="oneselectCart" resultType="MyCart">
+select * from cart where cart_num=#{cart_num}
+ </select>
+
+<select id="useridCartSelect" resultType="MyCart">
+select * from cart where cart_user=#{cart_user}
+
+
+</select>
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Login.model.Customer">
+	
+	<insert id="InsertData">
+		insert into customer(customerno,customer_name,customer_id,customer_passwd,customer_email,customer_hpnumber) 
+		values(customer_seq.nextval,#{customer_name},#{customer_id},#{customer_passwd},#{customer_email},#{customer_hpnumber})
+	</insert>
+
+	
+	<select id="GetData" resultType="MyCustomer">
+		select * from customer 
+		where customer_id = #{customer_id} 
+	</select>
+	
+	<select id="idcheck" resultType="int">
+      SELECT COUNT(*) FROM customer
+      WHERE
+          customer_id = #{customer_id}
+	</select>
+	
+	
+	 
+	<select id="ListData" resultType="MyCustomer">
+		select * from customer  
+		
+	</select>
+	
+	<select id="getOneData" resultType="MyCustomer">
+		select * from customer  		
+		where customer_name = #{customer_name} and customer_hpnumber = #{customer_hpnumber}
+	</select>
+	
+	
+	
+	<select id="GetTotalCount" resultType="int">
+		select count(*) from customer
+		<if test="whatColumn=='all'">
+		where customer_id like #{keyword} or customer_name like #{keyword}
+		</if>
+		<if test="whatColumn=='customer_name'">
+		where customer_name like #{keyword} 
+		</if>
+		<if test="whatColumn=='customer_id'">
+		where customer_id like #{keyword}
+		</if>
+		
+	</select>
+	
+	<select id="GetDataList" resultType="MyCustomer">
+		select * from customer
+		<if test="whatColumn=='all'">
+		where customer_id like #{keyword} or customer_name like #{keyword}
+		</if>
+		<if test="whatColumn=='customer_name'">
+		where customer_name like #{keyword} 
+		</if>
+		<if test="whatColumn=='customer_id'">
+		where customer_id like #{keyword}
+		</if>
+		
+
+	order by customerno
+
+		
+	</select>
+	
+
+	<delete id="deleteData" >
+		delete from customer
+		where customerno = #{customerno}
+	</delete>
+	
+	<update id="UpdataData">
+		update customer set
+		customer_name = #{customer_name},customer_id = #{customer_id},customer_email = #{customer_email},
+		customer_hpnumber = #{customer_hpnumber}
+		where customer_id = #{customer_id}
+	</update>
+	
+	<select id="getPwdFind" resultType="MyCustomer">
+		select * from customer  		
+		where customer_name = #{customer_name} and customer_id = #{customer_id}
+	</select>
+	
+	<select id="customergetnum" resultType="MyCustomer">
+	select * from customer where customerno = #{customerno}
+	</select>
+	
+	<update id="mypageupdate">
+	update customer set customer_passwd = #{customer_passwd} , customer_email=#{customer_email},
+	customer_hpnumber=#{customer_hpnumber} where customerno=#{customerno}
+	</update>
+	
+</mapper>
+

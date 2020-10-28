@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Music.model.Dj">
+<select id="GetDjList" resultType="MyDJ">
+select * from Dj order by Dj_no
+</select>
+
+<insert id="insertDj">
+insert into Dj(Dj_no,Dj_code,Dj_list) values(Dj_seq.nextval, #{dj_code},#{dj_list})
+</insert>
+<delete id="DeleteDj">
+delete from Dj where Dj_no=#{dj_no}
+</delete>
+<select id="selectOne" resultType="MyDJ">
+select * from Dj where Dj_no=#{dj_no}
+</select>
+
+<select id="GetTotalCount" resultType="int">
+select count(*) from dj
+</select>
+</mapper>

@@ -1,0 +1,237 @@
+
+
+drop sequence music_seq;
+create sequence music_seq start with 1 increment by 1 nocache;
+
+drop table music;
+create table music(    --제일중요한 음악 테이블 
+  mno number primary key,
+  music_title varchar2(50) not null,  --노래제목
+  music_price number not null, -- 음악 가격
+  music_dj varchar2(3000) , --카테
+  music_ganre varchar2(50) not null, 
+  music_recount number,  --조회수
+  music_image  varchar2(50), --음악앨범이미지
+  music_song  varchar2(50), -- 음악mp3파일
+  music_singer varchar2(50), 
+  music_heart number,
+  music_lyics varchar2(50), --가사
+  music_date date               --등록일
+);
+
+
+
+select * from music;
+drop sequence notice_seq;
+create sequence notice_seq start with 1 increment by 1 nocache;
+
+drop table notice;
+create table notice(  --공지사항 테이블 
+  noticeno number primary key,
+  notice_title varchar2(50) not null,
+  notice_content varchar2(3000) ,
+  notice_recount number,     --공지사항 조회수
+notice_date date
+);
+
+select * from notice;
+
+drop sequence QnA_seq;
+create sequence QnA_seq start with 1 increment by 1 nocache;
+
+drop table QnA;
+create table QnA(             
+  qna_no number primary key,    
+  qna_category varchar2(50),
+  qna_qustion varchar2(500),
+  qna_answer varchar2(3000) 
+);
+select * from qna;
+
+drop sequence Dj_seq;
+create sequence Dj_seq start with 1 increment by 1 nocache;
+
+drop table Dj;
+create table Dj(             
+  Dj_no number primary key,    
+  Dj_code varchar2(3000) not null,
+  Dj_list varchar2(3000) 
+);
+select * from dj;
+
+drop sequence cart_seq;
+create sequence cart_seq start with 1 increment by 1 nocache;
+
+drop table cart;
+create table cart(
+cart_num number primary key,
+cart_user varchar2(50),
+cart_album varchar2(50),
+cart_mno number,
+cart_title varchar2(50),
+cart_singer varchar2(50),
+cart_price number,
+cart_date date,
+cart_amount number default 0
+);
+
+select * from cart;
+
+drop sequence board_seq;
+create sequence board_seq start with 1 increment by 1 nocache;
+
+drop table board;
+create table board(  
+  boardno number primary key,
+  board_writer varchar2(50),  --작성자
+  board_passwd varchar2(50),
+  board_title varchar2(50),     --제목
+  board_date date,          --등록일
+  board_recount number,     --조회수
+  board_content varchar2(3000),   
+  board_recontent varchar2(50)   --리플
+);
+select * from board;
+
+drop sequence recontent_seq;
+create sequence recontent_seq start with 1 increment by 1 nocache;
+
+drop table recontent;
+create table recontent(  
+  recontentno number primary key,
+  recontent_boardno number,    --글번호
+  recontent_writer varchar2(50),  --작성자
+  recontent_passwd varchar2(50),
+  recontent_content varchar2(1000),
+  recontent_date date
+  );
+  select * from recontent
+  ;
+  
+drop sequence orders_seq;
+create sequence orders_seq start with 1 increment by 1 nocache ;
+
+drop table orders CASCADE CONSTRAINTS;
+create table orders(  
+  ordersno number primary key,
+  orders_title varchar2(50),
+   orders_singer varchar2(50),
+   orders_album varchar2(50),
+   orders_price varchar2(50),
+  orders_mno number,
+  orders_userid varchar2(50),
+  orders_date date
+  );
+select * from orders;
+
+drop sequence customer_seq;  
+create sequence customer_seq start with 1 increment by 1 nocache;
+
+drop table customer;
+create table customer(
+customerno number primary key,
+customer_name varchar2(50),
+customer_id varchar2(50),
+customer_passwd varchar2(50),
+customer_email varchar2(50),
+customer_hpnumber varchar2(50)
+);
+
+select * from customer;
+
+
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'하드캐리','GOT7','dance','갓7.jpg','노래10.mp3','갓세븐.txt','2017.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'니가하면','GOT7','Ballade','갓72.jpg','노래11.mp3','갓세븐.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Look','GOT7','dance','갓73.jpg','노래12.mp3','갓세븐.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'딱 좋아','GOT7','dance','갓74.jpg','노래13.mp3','갓세븐.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'You Are','GOT7','hiphop','갓75.jpg','노래14.mp3','갓세븐.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'하지하지마','GOT7','hiphop','갓76.jpg','노래14.mp3','갓세븐.txt','2015.11.15',0,500,0);
+ 
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(100,'봄비','장범준','acoustic','장범준.jpg','노래14.mp3','장범준.txt','2015.11.15',0,500,0);
+ 
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Problem','ariana grande','pop','아리아나.jpg','노래1.mp3','아리아나그란데.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Rain On Me','ariana grande','pop','아리아나2.jpg','노래4.mp3','아리아나그란데.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Bang Banf','ariana grande','pop','아리아나3.jpg','노래5.mp3','아리아나그란데.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Boyfriend','ariana grande','pop','아리아나4.jpg','노래6.mp3','아리아나그란데.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Breathin','ariana grande','pop','아리아나5.jpg','노래7.mp3','아리아나그란데.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Love Me Haeder','ariana grande','pop','아리아나6.jpg','노래8.mp3','아리아나그란데.txt','2015.11.15',0,500,0);
+
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'에잇','IU','acoustic','아이유.jpg','노래1.mp3','아이유.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'너랑 나','IU','acoustic','아이유1.jpg','노래1.mp3','아이유.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'좋은 날','IU','acoustic','아이유7.jpg','노래1.mp3','아이유.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'팔레트','IU','acoustic','아이유2.jpg','노래4.mp3','아이유.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'삐삐','IU','acoustic','아이유3.jpg','노래5.mp3','아이유.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'시간의 바깥','IU','acoustic','아이유4.jpg','노래6.mp3','아이유.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'분홍신','IU','dance','아이유5.jpg','노래7.mp3','아이유.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'스물셋','IU','Ballade','아이유6.jpg','노래8.mp3','아이유.txt','2015.11.15',0,500,0);
+
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'너같은사람 또 없어','슈퍼주니어','dance','앨범사진.jpg','노래1.mp3','슈퍼주니어.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'미인아','슈퍼주니어','dance','앨범사진1.jpg','노래2.mp3','슈퍼주니어.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'black Suit','슈퍼주니어','dance','앨범사진2.jpg','노래1.mp3','슈퍼주니어.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Mr.simple','슈퍼주니어','hiphop','앨범사진6.jpg','노래4.mp3','슈퍼주니어.txt','2015.11.15',0,500,0);
+ 
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'살짝 설렜어','오마이걸','dance','오마이걸.jpg','노래5.mp3','아이유.txt','2015.11.15',0,500,0);
+ 
+ 
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'TT','TWICE','acoustic','트와이스.png','노래6.mp3','트와이스.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'LIKEY','TWICE','dance','트와이스1.jpg','노래7.mp3','트와이스.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'CHEER UP','TWICE','Ballade','트와이스2.jpg','노래8.mp3','트와이스.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'FANCY','TWICE','dance','트와이스3.jpg','노래6.mp3','트와이스.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'OOH-AHH하게','TWICE','dance','트와이스4.jpg','노래7.mp3','트와이스.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'what is Love?','TWICE','dance','트와이스5.jpg','노래8.mp3','트와이스.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'SIGNAL','TWICE','Ballade','트와이스6.jpg','노래8.mp3','트와이스.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Heart Shaker','TWICE','dance','트와이스7.jpg','노래8.mp3','트와이스.txt','2015.11.15',0,500,0);
+
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'Fiction','하이라이트','acoustic','하이라이트.jpg','노래6.mp3','하이라이트.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'12시 30분','하이라이트','dance','하이라이트1.jpg','노래7.mp3','하이라이트.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'SHADOW','하이라이트','Ballade','하이라이트2.jpg','노래8.mp3','하이라이트.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'You','하이라이트','dance','하이라이트3.jpg','노래6.mp3','하이라이트.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'리본','하이라이트','dance','하이라이트4.jpg','노래7.mp3','하이라이트.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'숨','하이라이트','dance','하이라이트5.jpg','노래8.mp3','하이라이트.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'비가 오는 날엔','하이라이트','Ballade','하이라이트6.jpg','노래8.mp3','하이라이트.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'이럴 줄 알았어','하이라이트','dance','하이라이트7.jpg','노래8.mp3','하이라이트.txt','2015.11.15',0,500,0);
+insert into music(mno, music_title,music_singer,music_ganre,music_image,music_song,music_lyics,music_date,music_recount,music_price,music_heart)
+ values(music_seq.nextval,'얼굴 찌푸리지 말아요','하이라이트','dance','하이라이트8.jpg','노래8.mp3','하이라이트.txt','2015.11.15',0,500,0);
+commit;

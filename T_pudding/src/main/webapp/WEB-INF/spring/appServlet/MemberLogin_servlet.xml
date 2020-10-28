@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<mvc:annotation-driven/>	
+	<!-- controller 패키지를 탐색하여 모든 컴포넌트를 스캔하세요. -->
+	<context:component-scan base-package="Login"/>	
+	<context:component-scan base-package="Order"/>	
+	<context:component-scan base-package="Music"/>	
+	<!-- HandlerMapping 설정 -->
+	<!-- 명시하지 않으면 기본 값은 BeanNameUrlHandlerMapping이다. -->
+	<!-- Controller 설정 -->
+	<!-- ViewResolver -->
+	<bean id="internalResourceViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/MemberLogin/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+</beans>

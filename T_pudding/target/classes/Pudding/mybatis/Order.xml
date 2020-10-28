@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="Order.model.OrderDto">
+  
+  <insert id="insertorder">
+  	
+  	insert into orders
+  	values(orders_seq.nextval, #{cart_title},#{cart_singer}, #{cart_album},
+  	#{cart_price}, #{cart_mno}, #{cart_user},sysdate)
+  		
+  
+  </insert>
+  
+  <insert id="insertorderOne">
+  	insert into orders
+  	values(orders_seq.nextval, #{music_title}, #{music_singer}, #{music_image},
+  	#{music_price}, #{mno}, #{user},sysdate)
+  
+  </insert>
+  
+  <select id="getDataList" resultType="MyOrder">
+  	select * from orders order by orders_title asc
+  </select>
+  
+  
+ <select id="getDataSearchList" resultType="MyOrder">
+  	select * from orders
+  	<if test="whatColumn=='orders_title'">
+  		where orders_title like #{keyword} order BY orders_title asc
+  	</if>
+    <if test="whatColumn=='orders_singer'">
+  		where orders_singer like #{keyword} order by orders_title asc
+  	</if>
+  	 <if test="whatColumn=='orders_userid'">
+  		where orders_userid like #{keyword} order by orders_title asc
+  	</if>
+  </select>
+
+  
+  <select id="GetTotalCount" resultType="int">select count(*) from orders </select>
+  
+  <select id="OrderUserList" resultType="MyOrder">
+  	select * from orders where orders_userid=#{customer_id} order by orders_title asc
+  </select>
+  
+  <select id="UserOrderList" resultType="MyOrder">
+  	select * from orders where orders_userid=#{orders_userid} and orders_mno=#{orders_mno}
+  </select>
+  
+  </mapper>
+  
+  

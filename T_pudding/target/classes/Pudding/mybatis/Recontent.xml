@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Boarder.model.Recontent">
+  <insert id="InsertRecontent">
+     insert into recontent
+     values (recontent_seq.nextval, #{recontent_boardno}, #{recontent_writer}, #{recontent_passwd}, #{recontent_content}, sysdate)
+  </insert>
+  
+  <select id="SelectRecontent" resultType="MyRecontent">
+     select * from recontent where recontent_boardno=#{boardno}
+ 
+  </select>
+  
+  <select id="selectoneRecontent" resultType="MyRecontent">
+  select * from recontent where recontentno=#{recontentno}
+  </select>
+  
+  <update id="UpdateRecontent">
+   update recontent set recontent_content=#{recontent_content},recontent_passwd =#{recontent_passwd} where recontentno=#{recontentno}
+  
+  </update>
+  
+  <delete id="DeleteRecontent">
+       delete from recontent 
+       where recontentno=#{recontentno}
+  </delete>
+  
+  	<select id="GetpasswdData" resultType="MyRecontent">
+  	select * from recontent where recontent_passwd = #{recontent_passwd} and recontentno = #{recontentno}
+  	
+  	</select>
+  
+  
+  </mapper>
